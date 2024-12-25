@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using 'handlebars' TinyMCE v7 Example</title>
+    <style>
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+      }
+    </style>
+    <script
+      src="assets/tinymce/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"
+      defer
+    ></script>
+    <script>
+      // Initialize TinyMCE
+      document.addEventListener("DOMContentLoaded", function () {
+        tinymce.init({
+          license_key: "gpl",
+          selector: "#editor", // Target the textarea by its ID
+          height: 300, // Set the height of the editor
+          menubar: false,
+          plugins: "handlebars code",
+          toolbar: "handlebars code",
+          content_css: ["custom.css", "custom_affix.css"],
+          handlebars: {
+            prefix: "{{",
+            items: [
+              { text: "First Name", value: "firstName" },
+              { text: "Last Name", value: "lastName" },
+              { text: "Hotel Name", value: "hotelName" },
+              { text: "Checkin Date", value: "begins" },
+              { text: "Checkout Date", value: "ends" },
+            ],
+            suffix: "}}",
+          },
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Handlebars Templating Plugin for TinyMCE.</h1>
+    <p>This a opensource plugin for templating content within TinyMCE.</p>
+    <h2>Demo</h2>
+    <textarea id="editor">
+      Attention {{firstName}} {{lastName}}:<br><br>This is reminder of your upcoming stay at {{hotelName}}. <br><br>Your reservation dates are: {{begins}} to {{ends}}.</span>
+    </textarea>
+
+    <h2>Setup</h2>
+    <p>
+      Depending on your framework, there are multiple ways to configure this
+      plugin.
+    </p>
+    <p>
+      Start with these basic
+      <a
+        href="https://www.tiny.cloud/docs/tinymce/latest/examples/#general-examples"
+        >examples</a
+      >
+      first. In general, you need to configure the
+      <code>tinymce.init()</code> with
+    </p>
+    <div style="width: 75%; overflow-x: auto">
+      <pre>  
+    <code class="language-javascript line-numbers">
+tinymce.init({
+
+  // Step 1: Configure the plugin to load and add it to the toolbar
+  plugins: "handlebars code", // add handlebars plugin
+  toolbar: "handlebars code", // add it to the toolbar
+
+  // Step 2: Include the configuration for plugin prefix/suffix and items
+  handlebars: {
+    prefix: "{{",
+    items: [
+      { text: "First Name", value: "firstName" },
+      { text: "Last Name", value: "lastName" },
+      { text: "Hotel Name", value: "hotelName" },
+      { text: "Checkin Date", value: "begins" },
+      { text: "Checkout Date", value: "ends" },
+    ],
+    suffix: "}}",
+  },
+
+  // Step 3: Add any custom styling
+  content_css: ["custom_affix.css"], // .handlebars-data-affix { font-weight: 900; color: rgb(46, 149, 211); }
+});
+      </code>
+      </pre>
+    </div>
+  </body>
+</html>
